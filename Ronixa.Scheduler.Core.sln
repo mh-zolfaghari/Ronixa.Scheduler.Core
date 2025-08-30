@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ronixa.Scheduler.Core.Application.Sample", "Ronixa.Scheduler.Core.Application.Sample\Ronixa.Scheduler.Core.Application.Sample.csproj", "{3F349C66-87E6-4E81-8671-998D86C6EA65}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{1F6A0D73-B715-49D8-90BB-02975C129948}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F6A0D73-B715-49D8-90BB-02975C129948}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F6A0D73-B715-49D8-90BB-02975C129948}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F349C66-87E6-4E81-8671-998D86C6EA65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F349C66-87E6-4E81-8671-998D86C6EA65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F349C66-87E6-4E81-8671-998D86C6EA65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F349C66-87E6-4E81-8671-998D86C6EA65}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

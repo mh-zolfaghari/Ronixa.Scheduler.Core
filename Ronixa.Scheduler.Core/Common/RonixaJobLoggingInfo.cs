@@ -1,38 +1,53 @@
 ﻿namespace Ronixa.Scheduler.Core.Common
 {
-    internal record RonixaJobLoggingInfo: IRonixaJobStatusInformation
+    public record RonixaJobLoggingInfo: IRonixaJobStatusInformation
     {
+        private Exception? _lastError;
+        private DateTime? _lastErrorAt;
+        private TimeSpan? _lastErrorDuration;
+
+        private DateTime? _lastDoneAt;
+        private TimeSpan? _lastDoneDuration;
+
         public DateTime StartedAt { get; private set; } = DateTime.UtcNow;
         public TimeSpan? Duration { get; private set; }
-        public RonixaJobState State { get; private set; } = RonixaJobState.Started;
+        public RonixaJobExecutionState State { get; private set; } = RonixaJobExecutionState.Started;
         public Exception? Exception { get; private set; } = null;
+        public DateTime? LastExecution { get; private set; } = null;
 
-        internal RonixaJobLoggingInfo Init()
+        internal void Init()
         {
             StartedAt = DateTime.UtcNow;
-            State = RonixaJobState.Started;
+            State = RonixaJobExecutionState.Started;
             Duration = null;
             Exception = null;
-
-            return this;
         }
 
-        internal RonixaJobLoggingInfo ToDone()
+        internal void ToDone()
         {
-            State = RonixaJobState.Done;
+            State = RonixaJobExecutionState.Done;
             Duration = DateTime.UtcNow.Subtract(StartedAt);
+            LastExecution = DateTime.UtcNow;
             Exception = null;
-
-            return this;
+            _lastDoneDuration = this.Duration.Value;
+            _lastDoneAt = DateTime.UtcNow;
         }
 
-        internal RonixaJobLoggingInfo ToError(Exception exception)
+        internal void ToError(Exception exception)
         {
-            State = RonixaJobState.Error;
+            State = RonixaJobExecutionState.Error;
+            Duration = DateTime.UtcNow.Subtract(StartedAt);
+            LastExecution = DateTime.UtcNow;
             Exception = exception;
-            Duration = null;
-
-            return this;
+            _lastError = exception;
+            _lastErrorDuration = this.Duration.Value;
+            _lastErrorAt = DateTime.UtcNow;
         }
+
+        public JobInfoLastException GetLastError()
+            => new(_lastError, _lastErrorAt, _lastErrorDuration);
+
+        public JobInfoLastSuccess GetLastDone()
+            => new(_lastDoneAt, _lastDoneDuration);
     }
 }

@@ -1,4 +1,6 @@
 ﻿namespace Ronixa.Scheduler.Core.Contracts
 {
-    public interface IRonixaJob { }
+    public interface IRonixaJob : IRonixaManageableJob, IHostedService, IDisposable
+    {
+    }
 }

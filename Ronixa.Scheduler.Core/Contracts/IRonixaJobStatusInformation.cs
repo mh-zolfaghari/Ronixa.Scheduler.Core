@@ -4,7 +4,11 @@
     {
         DateTime StartedAt { get; }
         TimeSpan? Duration { get; }
-        RonixaJobState State { get; }
+        RonixaJobExecutionState State { get; }
         Exception? Exception { get; }
+        DateTime? LastExecution { get; }
+
+        JobInfoLastException GetLastError();
+        JobInfoLastSuccess GetLastDone();
     }
 }

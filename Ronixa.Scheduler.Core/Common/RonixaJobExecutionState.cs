@@ -1,6 +1,6 @@
 ﻿namespace Ronixa.Scheduler.Core.Common
 {
-    public enum RonixaJobState : byte
+    public enum RonixaJobExecutionState : byte
     {
         Started = 0,
         Done = 1,

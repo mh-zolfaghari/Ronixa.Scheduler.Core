@@ -1,0 +1,6 @@
+@Ronixa.Scheduler.Core.Application.Sample_HostAddress = http://localhost:5032
+
+GET {{Ronixa.Scheduler.Core.Application.Sample_HostAddress}}/Job/
+Accept: application/json
+
+###
