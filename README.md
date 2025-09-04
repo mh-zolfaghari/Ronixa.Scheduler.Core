@@ -1,103 +1,123 @@
-﻿# 📐 Ronixa.Scheduler.Core - Job Scheduler Project
+﻿
+# 📐 Ronixa.Scheduler.Core - Job Scheduler Project
 
-The **Ronixa.Scheduler.Core** project is a **.NET 8 library** that implements a powerful and flexible job scheduling system built on top of the `IHostedService` dependency structure.  
-It is designed to make background job scheduling in **ASP.NET Core applications** clean, extensible, and developer-friendly.  
-
-By integrating this library into your application, you can:
-- Run automated recurring jobs with flexible scheduling.
-- Start, stop, pause, and resume jobs at runtime programmatically.
-- Capture execution details such as last success, last error, duration, and execution state.
-- Manage jobs via API endpoints or programmatically through a **Job Manager Service**.
+🇬🇧 English | 🇮🇷 فارسی
 
 ![dotnet-version](https://img.shields.io/badge/dotnet%20version-net8.0-blue)
 
 ---
 
-## ⭐ Introduction
-
-In modern applications, recurring tasks such as **sending emails**, **generating reports**, **data synchronization**, or **cleanup tasks** are very common.  
-Instead of relying on external schedulers or over-complicating with Windows services and cron jobs, **Ronixa.Scheduler.Core** provides a **lightweight and native .NET solution**.  
-
-This library allows developers to implement recurring jobs with:
-- Minimal configuration
-- Centralized monitoring
-- Full control over job lifecycle at runtime
-
----
-
-## 🔎 Core Features
-
-- ⏰ **Recurring Jobs** – Schedule jobs to run at fixed intervals using `TimeSpan`.
-- ▶️ **Job Lifecycle Management** – Start, stop, pause, and resume jobs dynamically.
-- 📝 **Execution Logging** – Track job execution state (`Started`, `Done`, `Error`), duration, and timestamps.
-- ⚡ **Error Handling** – Automatically logs job exceptions with contextual information.
-- 🛠 **Dependency Injection Friendly** – Fully integrated with the **ASP.NET Core DI container**.
-- 📊 **Status Monitoring** – Access job metadata (`LastExecution`, `NextExecution`, `LastSuccess`, `LastException`) at runtime.
-- 🚀 **Plug-and-Play Integration** – Just add your jobs and register them via built-in extension methods.
+# 📑 Table of Contents | فهرست مطالب
+- [⭐ Introduction | مقدمه](#-introduction--مقدمه)
+- [🔎 Core Features | ویژگی‌های اصلی](#-core-features--ویژگیهای-اصلی)
+- [✅ Technical Features | ویژگی‌های فنی](#-technical-features--ویژگیهای-فنی)
+- [🧑‍💻 Development & Deployment | توسعه و استقرار](#-development--deployment--توسعه-و-استقرار)
+- [💾 Getting Started | شروع به کار](#-getting-started--شروع-به-کار)
+- [🚀 Usage Example | نمونه استفاده](#-usage-example--نمونه-استفاده)
+- [📊 Job Manager API | متدهای مدیریت جاب](#-job-manager-api--متدهای-مدیریت-جاب)
+- [🛠 Best Practices | بهترین شیوه‌ها](#-best-practices--بهترین-شیوهها)
+- [❓ FAQ | سوالات متداول](#-faq--سوالات-متداول)
+- [🌈 Contributing | مشارکت](#-contributing--مشارکت)
+- [🌟 Support | پشتیبانی](#-support--پشتیبانی)
+- [🔐 License | لایسنس](#-license--لایسنس)
+- [🩷 Follow Me | ارتباط با من](#-follow-me--ارتباط-با-من)
 
 ---
 
-## ✅ Technical Features
+## ⭐ Introduction | مقدمه
 
-- Built on **.NET 8** and `IHostedService` for first-class integration.
-- Provides **`IRonixaJobManagerService`** to manage jobs globally.
-- Declarative job metadata using the `RonixaJobSchedulerAttribute`.
-- Strongly-typed job configuration via `IRonixaJobScheduleConfiguration<T>`.
-- Lightweight implementation (no external dependencies, only uses BCL & Microsoft.Extensions.Hosting).
-- Thread-safe lifecycle management with lock-based state control.
+**EN**  
+The **Ronixa.Scheduler.Core** project is a **.NET 8 library** for background job scheduling using `IHostedService`.  
+It enables developers to run recurring jobs, monitor execution, and manage job lifecycles easily in **ASP.NET Core applications**.
 
----
-
-## 🧑‍💻 Development and Deployment Features
-
-- **Cross-Platform** – Works on Windows, Linux, and macOS.
-- **Cloud Ready** – Ideal for containerized environments like **Docker** and **Kubernetes**.
-- **Extensible** – Easily add custom logging, monitoring, and execution policies.
-- **Production Ready** – Designed with error handling, safe job restarts, and resiliency.
+**FA**  
+پروژه **Ronixa.Scheduler.Core** یک کتابخانه‌ی **.NET 8** برای زمان‌بندی وظایف پس‌زمینه با استفاده از `IHostedService` است.  
+این کتابخانه به توسعه‌دهندگان کمک می‌کند تا به راحتی جاب‌های تکراری را اجرا کنند، وضعیت آن‌ها را پایش نمایند و چرخه عمرشان را مدیریت کنند.
 
 ---
 
-## 💾 Getting Started
+## 🔎 Core Features | ویژگی‌های اصلی
 
-### Prerequisites
-Make sure you have the following tools installed on your machine:
+**EN**
+- ⏰ Recurring Jobs with `TimeSpan`
+- ▶️ Lifecycle management (Start/Stop/Pause/Resume)
+- 📝 Execution Logging & Metadata
+- ⚡ Exception Handling
+- 🛠 DI Friendly
+- 📊 Status Monitoring
+- 🚀 Plug-and-Play
 
-- [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+**FA**
+- ⏰ جاب‌های تکراری با استفاده از `TimeSpan`
+- ▶️ مدیریت چرخه عمر (شروع/توقف/مکث/ادامه)
+- 📝 ثبت لاگ و متادیتا
+- ⚡ مدیریت خطاها
+- 🛠 سازگار با DI
+- 📊 مانیتورینگ وضعیت
+- 🚀 نصب و استفاده سریع
+
+---
+
+## ✅ Technical Features | ویژگی‌های فنی
+
+**EN**
+- Built on **.NET 8** & `IHostedService`
+- `IRonixaJobManagerService` for global control
+- Declarative job metadata with attributes
+- Strongly-typed configuration
+- No external dependencies
+
+**FA**
+- ساخته‌شده بر بستر **.NET 8** و `IHostedService`
+- استفاده از `IRonixaJobManagerService` برای کنترل سراسری
+- متادیتای جاب‌ها با Attributeها
+- کانفیگ strongly-typed
+- بدون وابستگی خارجی
+
+---
+
+## 🧑‍💻 Development & Deployment | توسعه و استقرار
+
+**EN**
+- Cross-platform (Windows/Linux/macOS)
+- Cloud & Docker/Kubernetes Ready
+- Extensible for monitoring/logging
+- Production-ready
+
+**FA**
+- کراس‌پلتفرم (ویندوز/لینوکس/مک)
+- آماده برای Cloud و Docker/K8s
+- قابلیت توسعه برای مانیتورینگ/لاگ‌گیری
+- آماده برای محیط Production
+
+---
+
+## 💾 Getting Started | شروع به کار
+
+### Prerequisites | پیش‌نیازها
+**EN**
+- [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)  
 - [Git](https://git-scm.com/)
 
-### Cloning the Repository
-Open your terminal or command prompt and run the following command:
+**FA**
+- نصب [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)  
+- نصب [Git](https://git-scm.com/)
+
+### Clone & Restore | کلون و بازیابی
 
 ```bash
 git clone https://github.com/mh-zolfaghari/Ronixa.Scheduler.Core.git
-```
-
-This will create a local copy of the **Ronixa.Scheduler.Core** repository on your machine.
-
-### Restoring Dependencies
-Navigate to the project directory:
-
-```bash
 cd Ronixa.Scheduler.Core
-```
-
-Run the following command to restore project dependencies:
-
-```bash
 dotnet restore
 ```
 
 ---
 
-## 🚀 Usage Example
+## 🚀 Usage Example | نمونه استفاده
 
-### 1. Define a Job
+### 1. Define Job | تعریف جاب
 ```csharp
-[RonixaJobScheduler(
-    id: "EDF401E5-4FB7-4B98-B6B8-68528F617432",
-    title: "Sample Job",
-    description: "This is Sample Job."
-)]
+[RonixaJobScheduler(id: JobIds.SampleJobKey, title: "Sample Job", description: "This is Sample Job.")]
 public class SampleJob : RonixaJob
 {
     private readonly ILogger<SampleJob> _logger;
@@ -106,16 +126,16 @@ public class SampleJob : RonixaJob
         : base(config.Duration, config.ForceExecuteInStartJob)
     {
         _logger = logger;
-        this.Job_Executed += SampleJob_Job_Executed;
+        Job_Executed += SampleJob_Job_Executed;
     }
 
     private void SampleJob_Job_Executed(object? sender, IRonixaJobExecuted e)
     {
         if (e.Status.State == RonixaJobExecutionState.Done)
-            _logger.LogInformation($"{e.Information.Title} completed in {e.Status.Duration?.TotalSeconds ?? 0}s");
+            _logger.LogInformation($"{e.Information.Title} completed.");
 
         if (e.Status.State == RonixaJobExecutionState.Error)
-            _logger.LogError(e.Status.Exception, $"{e.Information.Title} failed after {e.Status.Duration?.TotalSeconds ?? 0}s");
+            _logger.LogError(e.Status.Exception, $"{e.Information.Title} failed.");
     }
 
     public override IRonixaJobInformation SetJobInfo() => GetJobInfo(this);
@@ -128,7 +148,7 @@ public class SampleJob : RonixaJob
 }
 ```
 
-### 2. Register Services
+### 2. Register Services | ثبت سرویس‌ها
 ```csharp
 builder.Services.AddRonixaSchedulingJob<SampleJob>(c =>
 {
@@ -139,66 +159,121 @@ builder.Services.AddRonixaSchedulingJob<SampleJob>(c =>
 builder.Services.AddRonixaJobManagerService();
 ```
 
-### 3. Control Jobs via API
+### 3. Control via API | کنترل از طریق API
+
+**EN**  
+Below is a sample `JobController` that demonstrates how to control jobs using REST API. This example is aligned with the **Sample Project** included in the repository.
+
+**FA**  
+کد زیر یک `JobController` نمونه است که نشان می‌دهد چگونه می‌توانید از طریق REST API جاب‌ها را کنترل کنید. این مثال مطابق با **پروژه Sample** موجود در ریپازیتوری نوشته شده است.
+
 ```csharp
 [ApiController]
 [Route("jobs")]
-public class JobController : ControllerBase
+public class JobController(IRonixaJobManagerService ronixaJobManager) : ControllerBase
 {
-    private readonly IRonixaJobManagerService _manager;
+    [HttpGet("/play")]
+    public IActionResult Play() => GetSampleJobStatus(() => ronixaJobManager.StartJob(JobIds.SampleJobId));
 
-    public JobController(IRonixaJobManagerService manager) => _manager = manager;
+    [HttpGet("/pause")]
+    public IActionResult Pause() => GetSampleJobStatus(() => ronixaJobManager.PauseJob(JobIds.SampleJobId));
 
-    [HttpGet("start/{id}")]
-    public IActionResult Start(Guid id) => Ok(_manager.StartJob(id));
+    [HttpGet("/stop")]
+    public IActionResult Stop() => GetSampleJobStatus(() => ronixaJobManager.StopJob(JobIds.SampleJobId));
 
-    [HttpGet("pause/{id}")]
-    public IActionResult Pause(Guid id) => Ok(_manager.PauseJob(id));
+    [HttpGet("/status")]
+    public IActionResult Status() => GetSampleJobStatus();
 
-    [HttpGet("stop/{id}")]
-    public IActionResult Stop(Guid id) => Ok(_manager.StopJob(id));
+    [HttpGet("/list")]
+    public IActionResult List() => Ok(ronixaJobManager.GetAll());
 
-    [HttpGet("status/{id}")]
-    public IActionResult Status(Guid id) => Ok(_manager.GetJobStatus(id));
+    private OkObjectResult GetSampleJobStatus(Action? jobAction = null)
+    {
+        jobAction?.Invoke();
+        return Ok(ronixaJobManager.GetJobStatus(JobIds.SampleJobId));
+    }
 }
 ```
 
 ---
 
-## 🌈 Contributing
+## 📊 Job Manager API | متدهای مدیریت جاب
 
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request.  
-You can also simply open an issue with the tag `"enhancement"`.
-
-1. Fork the Project  
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)  
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)  
-4. Push to the Branch (`git push origin feature/AmazingFeature`)  
-5. Open a Pull Request  
+| Method | Description (EN) | توضیح (FA) |
+|--------|------------------|-------------|
+| `StartJob(Guid id)` | Start job execution | شروع جاب |
+| `PauseJob(Guid id)` | Pause job execution | توقف موقت جاب |
+| `ResumeJob(Guid id)` | Resume paused job | ادامه جاب متوقف‌شده |
+| `StopJob(Guid id)` | Stop job completely | توقف کامل جاب |
+| `GetJobStatus(Guid id)` | Get job status & metadata | دریافت وضعیت جاب |
+| `GetAll()` | List all registered jobs | لیست همه جاب‌های ثبت‌شده |
 
 ---
 
-## 🌟 Support this project
-If you believe this project has potential, feel free to **star this repo** ⭐ and share it with others.  
-Your support helps this library grow and reach more developers!
+## 🛠 Best Practices | بهترین شیوه‌ها
+
+**EN**
+- Use **CancellationToken** properly in jobs.  
+- Keep jobs **idempotent** (safe to run multiple times).  
+- Implement **structured logging**.  
+- Prefer **short intervals** only for lightweight jobs.  
+- Always handle **exceptions inside ExecuteAsync**.
+
+**FA**
+- از **CancellationToken** به‌درستی استفاده کنید.  
+- جاب‌ها را **idempotent** طراحی کنید.  
+- لاگ‌گیری ساخت‌یافته داشته باشید.  
+- فاصله‌های کوتاه را فقط برای جاب‌های سبک استفاده کنید.  
+- همیشه **مدیریت خطاها** را داخل `ExecuteAsync` انجام دهید.
 
 ---
 
-## 🔐 License
+## ❓ FAQ | سوالات متداول
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+**Q: Can I run multiple jobs in parallel?**  
+Yes, each job runs in its own hosted task.  
+
+**س: آیا می‌توان چند جاب را موازی اجرا کرد؟**  
+بله، هر جاب در یک Task مجزا اجرا می‌شود.
+
+**Q: Can I dynamically add jobs at runtime?**  
+Currently, jobs must be registered at startup, but manager APIs allow runtime control.  
+
+**س: آیا می‌توان جاب‌ها را در زمان اجرا اضافه کرد؟**  
+فعلاً جاب‌ها باید در startup ثبت شوند، ولی مدیریت آن‌ها در زمان اجرا امکان‌پذیر است.
 
 ---
 
-## 🩷 Follow Me!
+## 🌈 Contributing | مشارکت
 
-You can connect with me on the social media and communication channels listed below:
+**EN**
+Contributions are welcome! Fork, branch, commit, and PR 🚀
+
+**FA**
+مشارکت شما پذیرفته است! Fork کنید، Branch بسازید، Commit بزنید و PR بدهید 🚀
+
+---
+
+## 🌟 Support | پشتیبانی
+
+**EN**
+If you like this project, please ⭐ star the repo.  
+
+**FA**
+اگر این پروژه را مفید می‌دانید، لطفاً ⭐ ستاره بدهید.
+
+---
+
+## 🔐 License | لایسنس
+
+Distributed under the MIT License.  
+توزیع‌شده تحت لایسنس MIT.
+
+---
+
+## 🩷 Follow Me | ارتباط با من
 
 [![LinkedIn][linkedin-shield]][linkedin-url]  [![Telegram][telegram-shield]][telegram-url]  [![WhatsApp][whatsapp-shield]][whatsapp-url]  [![Gmail][gmail-shield]][gmail-url]  ![GitHub followers](https://img.shields.io/github/followers/mh-zolfaghari)
-
----
 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?logo=linkedin&color=555
 [linkedin-url]: https://www.linkedin.com/in/ronixa/

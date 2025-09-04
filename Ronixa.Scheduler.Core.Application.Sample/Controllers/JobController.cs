@@ -2,38 +2,27 @@
 {
     [ApiController]
     [Route("jobs")]
-    public class JobController : ControllerBase
+    public class JobController(IRonixaJobManagerService ronixaJobManager) : ControllerBase
     {
-        private readonly IRonixaJobManagerService _ronixaJobManager;
-
-        public JobController(IRonixaJobManagerService ronixaJobManager)
-            => _ronixaJobManager = ronixaJobManager;
-
         [HttpGet("/play")]
-        public IActionResult Play()
-        {
-            var job = _ronixaJobManager.GetJobStatus(Guid.Parse("EDF401E5-4FB7-4B98-B6B8-68528F617432"));
-            _ronixaJobManager.StartJob(job!.Id);
-
-            return Ok(_ronixaJobManager.GetJobStatus(Guid.Parse("EDF401E5-4FB7-4B98-B6B8-68528F617432")));
-        }
+        public IActionResult Play() => GetSampleJobStatus(() => ronixaJobManager.StartJob(JobIds.SampleJobId));
 
         [HttpGet("/pause")]
-        public IActionResult Pause()
-        {
-            var job = _ronixaJobManager.GetJobStatus(Guid.Parse("EDF401E5-4FB7-4B98-B6B8-68528F617432"));
-            _ronixaJobManager.PauseJob(job!.Id);
-
-            return Ok(_ronixaJobManager.GetJobStatus(Guid.Parse("EDF401E5-4FB7-4B98-B6B8-68528F617432")));
-        }
+        public IActionResult Pause() => GetSampleJobStatus(() => ronixaJobManager.PauseJob(JobIds.SampleJobId));
 
         [HttpGet("/stop")]
-        public IActionResult Stop()
-        {
-            var job = _ronixaJobManager.GetJobStatus(Guid.Parse("EDF401E5-4FB7-4B98-B6B8-68528F617432"));
-            _ronixaJobManager.StopJob(job!.Id);
+        public IActionResult Stop() => GetSampleJobStatus(() => ronixaJobManager.StopJob(JobIds.SampleJobId));
 
-            return Ok(_ronixaJobManager.GetJobStatus(Guid.Parse("EDF401E5-4FB7-4B98-B6B8-68528F617432")));
+        [HttpGet("/status")]
+        public IActionResult Status() => GetSampleJobStatus();
+
+        [HttpGet("/list")]
+        public IActionResult List() => Ok(ronixaJobManager.GetAll());
+
+        private OkObjectResult GetSampleJobStatus(Action? jobAction = null)
+        {
+            jobAction?.Invoke();
+            return Ok(ronixaJobManager.GetJobStatus(JobIds.SampleJobId));
         }
     }
 }
